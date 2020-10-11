@@ -83,7 +83,6 @@ function load() {
     child[i].style.className = ".player1tile";
   });
   checkWin();
-  //move();
 }
 
 function makeMove() {
@@ -116,12 +115,10 @@ let time = 10;
 var width = 10;
 
 function counter() {
-  //move();
   let elem = document.getElementById("bar");
   let dispTime = document.getElementById("timer");
 
   width = time;
-  //progressbar.style.width = width;
   dispTime.innerHTML = time + "s Left";
 
   if (time === 0) {
@@ -130,7 +127,6 @@ function counter() {
   }
   elem.style.width = width + "%";
   time--;
-  //console.log(time);
 }
 
 function resetCounter() {
@@ -143,20 +139,5 @@ function resetCounter() {
 function createCounter() {
   let count = setInterval(counter, 1000);
 }
-
-//function move() {
-//  var elem = document.getElementById("bar");
-//  var width = 1;
-//  var id = setInterval(frame, 100);
-//  function frame() {
-//    if (width >= 100) {
-//      clearInterval(id);
-//    } else {
-//      width++;
-//      elem.style.width = width + "%";
-//     console.log(width);
-//   }
-//  }
-//}
 
 init();
