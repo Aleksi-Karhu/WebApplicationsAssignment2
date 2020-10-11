@@ -1,6 +1,7 @@
+import "./styles.css";
+
 let array;
 let player;
-let time;
 
 const wins = [
   [0, 1, 2, 3, 4],
@@ -55,7 +56,7 @@ function init() {
 }
 
 function checkWin() {
-  wins.forEach(function(check, i) {
+  wins.forEach(function (check, i) {
     if (
       array[check[0]] &&
       array[check[0]] === array[check[1]] &&
@@ -77,15 +78,16 @@ function checkWin() {
 function load() {
   let parent = document.getElementById("board");
   let child = parent.querySelectorAll("td");
-  array.forEach(function(mark, i) {
+  array.forEach(function (mark, i) {
     tiles[i].textContent = mark;
     child[i].style.className = ".player1tile";
   });
   checkWin();
+  //move();
 }
 
 function makeMove() {
-  let index = tiles.findIndex(function(tile) {
+  let index = tiles.findIndex(function (tile) {
     return tile === event.target;
   });
   array[index] = player;
@@ -96,6 +98,7 @@ function makeMove() {
   }
 
   player = changeTurn();
+  resetCounter();
   load();
 }
 
@@ -107,5 +110,53 @@ function changeTurn() {
   }
   return player;
 }
+
+let count = setInterval(counter, 1000);
+let time = 10;
+var width = 10;
+
+function counter() {
+  //move();
+  let elem = document.getElementById("bar");
+  let dispTime = document.getElementById("timer");
+
+  width = time;
+  //progressbar.style.width = width;
+  dispTime.innerHTML = time + "s Left";
+
+  if (time === 0) {
+    resetCounter();
+    changeTurn();
+  }
+  elem.style.width = width + "%";
+  time--;
+  //console.log(time);
+}
+
+function resetCounter() {
+  clearInterval(count);
+  time = 10;
+  width = 10;
+  createCounter();
+}
+
+function createCounter() {
+  let count = setInterval(counter, 1000);
+}
+
+//function move() {
+//  var elem = document.getElementById("bar");
+//  var width = 1;
+//  var id = setInterval(frame, 100);
+//  function frame() {
+//    if (width >= 100) {
+//      clearInterval(id);
+//    } else {
+//      width++;
+//      elem.style.width = width + "%";
+//     console.log(width);
+//   }
+//  }
+//}
 
 init();
